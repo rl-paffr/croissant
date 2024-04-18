@@ -102,7 +102,7 @@
             <p class="text">Par exemple, la serrure à combinaison classique basée sur un chiffrement rotatif:</p>
         <div class="textbox-container">
             <input type="text" id="inputText" oninput="countCharacters()">
-            <p class="counter" id="charCount">!</p>
+            <p class="counter" id="charCounter">!</p>
         </div>
         <p class="text">(Le programme suppose que seuls les caractères du clavier américain sont possibles, mais il prend en compte si vous ajoutez d'autres caractères spéciaux)</p>
         <p class="text">Dans ce cas, nous pouvons répéter les caractères et le nombre se simplifie en arrangements répétés, ou le nombre de caractères possibles élevé à la puissance de la longueur du mot de passe. Comme vous pouvez le constater, le nombre devient astronomiquement grand avec seulement quelques caractères.</p>
@@ -129,16 +129,7 @@
         if (distinctChars < 62) {
             distinctChars = 62;
         }
-        document.getElementById("charCount").innerText = "Le nombre de mots de passe possibles est:" + Math.pow(distinctChars, totalCount);
-    }
-    function countCharacters2() {
-        var inputText2 = document.getElementById("inputText2").value;
-        var distinctChars = new Set(inputText2).size;
-        var totalCount = inputText.length;
-        if (distinctChars < 62) {
-            distinctChars = 62;
-        }
-        document.getElementById("charCount").innerText = "Le nombre de mots de passe possibles est:" + Math.pow(distinctChars, totalCount);
+        document.getElementById("charCounter").innerText = "Le nombre de mots de passe possibles est:" + Math.pow(distinctChars, totalCount);
     }
         function generateRandomString() {
             var charCount = document.getElementById("charCount").value;
