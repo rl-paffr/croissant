@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cryptographie</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        text-align: center;
+        padding-top: 15vh; /* Adjusted space before content for smaller screens */
+    }
+    .text {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+    .collapsible {
+        background-color: #f1f1f1;
+        cursor: pointer;
+        padding: 18px;
+        width: 80%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.2rem;
+        margin: 10px auto;
+    }
+    .content {
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        width: 80%;
+        margin: 10px auto;
+    }
+    .active {
+        max-height: 2000px; /* Adjust to fit your content */
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="collapsible" onclick="toggleCollapsible(this)">Les jeux de dés sont courants dans les jeux de société classiques comme Monopoly ou "Nu te supara frate" en tant que composante de chance simple. Il existe toute une branche des mathématiques qui traite de la probabilité de gagner dans un jeu appelée "Théorie des jeux" ou "Théorie des jeux combinatoires".</div>
+        <div class="content">
+            <p class="text"></p>
+        </div>
+        <div class="collapsible" onclick="toggleCollapsible(this)">Un scénario courant consiste à essayer d'obtenir un lancer plus élevé que celui de votre adversaire. Nous pouvons calculer la probabilité en utilisant la combinatoire et en l'appliquant à un scénario réel:</div>
+        <div class="content">
+            <p class="text">Par exemple, la serrure à combinaison classique basée sur un chiffrement rotatif:</p>
+        </div>
+        <div class="collapsible" onclick="toggleCollapsible(this)">Nous pouvons également l'utiliser pour des jeux mathématiques, tels que la chance d'obtenir la même face sur x dés.</div>
+        <div class="content">
+            <p class="text">The mathematical notation is</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleCollapsible(collapsible) {
+            collapsible.classList.toggle('active');
+            var content = collapsible.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cryptographie</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        text-align: center;
+        padding-top: 15vh;
+    }
+    .text {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+    .collapsible {
+        background-color: #f1f1f1;
+        cursor: pointer;
+        padding: 18px;
+        width: 80%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.2rem;
+        margin: 10px auto;
+    }
+    .content {
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        width: 80%;
+        margin: 10px auto;
+    }
+    .active {
+        max-height: 2000px;
+    }
+    .textbox-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+    input[type="text"] {
+        width: 80%;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    .counter {
+        font-size: 1rem;
+    }
+    select {
+        padding: 10px;
+        font-size: 16px;
+        width: 150px;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-top: 10px;
+        cursor: pointer;
+        width: 100px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="collapsible" onclick="toggleCollapsible(this)">En cryptographie, la combinatoire est souvent utilisée pour estimer la sécurité des chiffrements et des codes d'accès. Cela se fait en comptant les combinaisons possibles du mot de passe, afin de voir combien de tentatives seraient nécessaires pour le deviner.</div>
+        <div class="content">
+            <p class="text">La même stratégie utilisée par les voleurs pour ouvrir des coffres-forts il y a 500 ans est la même que celle utilisée pour le crime numérique ! Des attaques appelées "attaques par force brute" sont utilisées, dans lesquelles vous prenez et essayez chaque combinaison jusqu'à ce que la bonne soit trouvée.</p>
+        </div>
+        <div class="collapsible" onclick="toggleCollapsible(this)">Par exemple, la serrure à combinaison classique basée sur un chiffrement rotatif, en supposant que les chiffres dans le chiffrement ne peuvent pas se répéter:</div>
+        <div class="content">
+            <p class="text">Par exemple, la serrure à combinaison classique basée sur un chiffrement rotatif:</p>
+            <img src="rotating lock.png" alt="LACAT" width="300" height="410">
+            <p class="text">            Le nombre de mots de passe possibles ici serait l'arrangement:</p>
+            <img src="aranjamente.PNG" alt="A(n, k)" width="300" height="150">
+            <p class="text">Où n est le nombre de chiffres possibles et k est la longueur du cadenas.</p>
+            <br>
+            <p class="text">Le programme suivant vous permet de voir les nombres possibles de combinaisons sur le cadenas:</p>
+            <select id="charCount">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <button onclick="generateRandomString()">générer</button>
+            <p class="counter" id="result">!</p>
+            <p class="counter" id="result2">!</p>
+        </div>
+        <div class="collapsible" onclick="toggleCollapsible(this)">À l'ère moderne, cependant, ce type de chiffrement est facile à trouver en devinant, donc nous ajoutons tous les caractères du clavier pour augmenter considérablement le nombre de mots de passe possibles:</div>
+        <div class="content">
+            <p class="text">Par exemple, la serrure à combinaison classique basée sur un chiffrement rotatif:</p>
+        <div class="textbox-container">
+            <input type="text" id="inputText" oninput="countCharacters()">
+            <p class="counter" id="charCount">!</p>
+        </div>
+        <p class="text">(Le programme suppose que seuls les caractères du clavier américain sont possibles, mais il prend en compte si vous ajoutez d'autres caractères spéciaux)</p>
+        <p class="text">Dans ce cas, nous pouvons répéter les caractères et le nombre se simplifie en arrangements répétés, ou le nombre de caractères possibles élevé à la puissance de la longueur du mot de passe. Comme vous pouvez le constater, le nombre devient astronomiquement grand avec seulement quelques caractères.</p>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        function toggleCollapsible(collapsible) {
+            collapsible.classList.toggle('active');
+            var content = collapsible.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+    function countCharacters() {
+        var inputText = document.getElementById("inputText").value;
+        var distinctChars = new Set(inputText).size;
+        var totalCount = inputText.length;
+        if (distinctChars < 62) {
+            distinctChars = 62;
+        }
+        document.getElementById("charCount").innerText = "Le nombre de mots de passe possibles est:" + Math.pow(distinctChars, totalCount);
+    }
+    function countCharacters2() {
+        var inputText2 = document.getElementById("inputText2").value;
+        var distinctChars = new Set(inputText2).size;
+        var totalCount = inputText.length;
+        if (distinctChars < 62) {
+            distinctChars = 62;
+        }
+        document.getElementById("charCount").innerText = "Le nombre de mots de passe possibles est:" + Math.pow(distinctChars, totalCount);
+    }
+        function generateRandomString() {
+            var charCount = document.getElementById("charCount").value;
+            var randomString = "";
+            var availableNumbers = Array.from({ length: 10 }, (_, i) => i);
+            var selectedNumbers = new Set();
+
+            while (selectedNumbers.size < charCount) {
+                var randomIndex = Math.floor(Math.random() * availableNumbers.length);
+                var randomNumber = availableNumbers[randomIndex];
+                selectedNumbers.add(randomNumber);
+                availableNumbers.splice(randomIndex, 1);
+            }
+
+            selectedNumbers.forEach(num => {
+                randomString += num;
+            });
+
+            document.getElementById("result").innerText = "Exemple de mot de passe: " + randomString;
+            document.getElementById("result2").innerText = "Mots de passe possibles avec " + charCount + " chiffres:" + factorial(10)/factorial(10 - charCount);
+        }
+        function factorial(n) {
+    if (n === 0 || n === 1)
+        return 1;
+    for (let i = n - 1; i >= 1; i--) {
+        n *= i;
+    }
+    return n;
+    }
+    </script>
+</body>
+</html>
